@@ -1,5 +1,5 @@
-class Solution:
-    def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
+class Solution(object):
+    def flipAndInvertImage(self, image):
         for element in image:
             element = element.reverse()
         for elem in image:
