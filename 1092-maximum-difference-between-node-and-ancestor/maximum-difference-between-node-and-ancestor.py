@@ -7,12 +7,14 @@
 class Solution:
     def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
         # recursion 
+        self.ans = 0
         def recurse(node,c_max,c_min):
             if not node:
-                return c_max - c_min
+                self.ans = max(c_max - c_min , self.ans)
+                return
             c_max = max(c_max,node.val)
             c_min = min(c_min,node.val)
-            left = recurse(node.left,c_max,c_min)
-            right = recurse(node.right,c_max,c_min)
-            return max(left,right)
-        return recurse(root,root.val,root.val)
+            recurse(node.left,c_max,c_min)
+            recurse(node.right,c_max,c_min)
+        recurse(root,root.val,root.val)
+        return self.ans
