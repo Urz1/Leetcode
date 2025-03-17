@@ -6,23 +6,18 @@
 #         self.right = right
 class Solution:
     def largestValues(self, root: Optional[TreeNode]) -> List[int]:
-        # BFS level_order traversal 
-        def level_order(root):
-            if not root:
-                return []
-            queue = deque([root])
-            result = []
-            while queue:
-                level_size = len(queue)
-                maxim = -float('inf')
-                for _ in range(level_size):  
-                    node = queue.popleft()
-                    maxim = max(maxim,node.val)
-                    
-                    if node.left:
-                        queue.append(node.left)
-                    if node.right:
-                        queue.append(node.right)
-                result.append(maxim)  
-            return result
-        return level_order(root)
+        # by using recursion
+        res = []
+        index = 0
+        def recurse(node,index):
+            nonlocal res
+            if not node:
+                return 
+            if len(res) == index:
+                res.append(node.val)
+            else:
+                res[index] = max(res[index],node.val)
+            recurse(node.left,index+1)
+            recurse(node.right,index+1)
+        recurse(root,index)
+        return res
