@@ -16,11 +16,5 @@ class Solution:
             for neighbour in graph[vertex]:
                 if neighbour not in visited:
                     dfs(neighbour, visited)
-        for edge in edges:
-            if edge[0] == source:
-                dfs(edge[0],visited)
-                return flag
-            elif edge[1] == source:
-                dfs(edge[1],visited)
-                return flag
-        
+        dfs(source,visited)
+        return flag
